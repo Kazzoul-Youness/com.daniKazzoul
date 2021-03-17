@@ -1,0 +1,24 @@
+plugins {
+    id 'application'
+    id 'org.flywaydb.flyway' version '7.5.4'
+}
+
+group 'MachineACafe'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_1_8  // you can put your version of java here !
+mainClassName = 'daniKazzoul.Gui' // here you should put the path of your class main from java package
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'log4j:log4j:1.2.8'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
+
+}
+
+
+// to run the application you can use the command line "gradle clean build run"

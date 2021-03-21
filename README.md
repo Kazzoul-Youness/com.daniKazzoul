@@ -1,5 +1,5 @@
 
-Projet simulateur d'une Machine à café phase implementation de l'UMONS
+Projet simulateur d'une Machine à café phase implementation à l'UMONS
 
 
 Titulaire: Tom MENS
@@ -9,6 +9,14 @@ Enseignant: Gauvain DEVILLEZ
 
 
 Autheurs    : Mohsine DANI & Kazzoul Youness
+
+
+
+Cours Modélisation Logicielle
+
+
+
+Master en sciences informatique
 
 
 

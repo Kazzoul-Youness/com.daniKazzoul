@@ -19,35 +19,36 @@ public class ParametreControlleur {
         return instance;
     }
 
-
-    /***********************        Quantité        ****************************************
+    /***********************        Quantité        ************************************************
      * @param vue*/
 
     public void createQuantiteButton(Vue vue) {
         vue.btnQuantit = new JButton("Quantite");
-        vue.btnQuantit.setIcon(new ImageIcon("icon//Quantite.png"));
+        //vue.btnQuantit.setIcon(new ImageIcon("icon//Quantite.png"));
         vue.btnQuantit.addActionListener(e -> {
             if (vue.quantite == 0) {
                 vue.textField_Quantite.setText(String.valueOf(QuantiteEnum.Moyen));
                 vue.quantite++;
             } else if (vue.quantite == 1) {
-                vue.textField_Quantite.setText(String.valueOf(QuantiteEnum.Gand));
+                vue.textField_Quantite.setText(String.valueOf(QuantiteEnum.Grand));
                 vue.quantite++;
             } else if (vue.quantite == 2) {
                 vue.textField_Quantite.setText(String.valueOf(QuantiteEnum.Petit));
                 vue.quantite = 0;
             }
         });
-        vue.btnQuantit.setBounds(131, 432, 107, 100);
+
+        vue.btnQuantit.setFont(new Font("Dialog", Font.BOLD, 18));
+        vue.btnQuantit.setBounds(150, 420, 120, 120);
         vue.frame.getContentPane().add(vue.btnQuantit);
     }
 
-    /***********************        Intensité        ****************************************
+    /***********************        Intensité        ************************************************
     * @param vue*/
 
     public void createIntensiteButton(Vue vue) {
         vue.btnIntensit = new JButton("Intensite");
-        vue.btnIntensit.setIcon(new ImageIcon("icon//Intensite.png"));
+       // vue.btnIntensit.setIcon(new ImageIcon("icon//Intensite.png"));
         vue.btnIntensit.addActionListener(e -> {
             if (vue.intensite == 0) {
                 vue.textField_Intensite.setText(String.valueOf(IntensiteEnum.Normal));
@@ -60,39 +61,50 @@ public class ParametreControlleur {
                 vue.intensite = 0;
             }
         });
-        vue.btnIntensit.setBounds(715, 404, 107, 100);
-        vue.frame.getContentPane().add(vue.btnIntensit);
 
+        vue.btnIntensit.setFont(new Font("Dialog", Font.BOLD, 18));
+        vue.btnIntensit.setBounds(690, 420, 120, 120);
+        vue.frame.getContentPane().add(vue.btnIntensit);
 
     }
 
+    /***********************        Deux Tasses        **************************************************
+     * @param vue*/
+
     public void createDeuxTasseButton(Vue vue) {
-        vue.btnDeuxtasses = new JButton("DeuxTasses");
+        //vue.btnDeuxtasses = new JButton("DeuxTasses");
+        vue.btnDeuxtasses = new JButton("");
         vue.btnDeuxtasses.setIcon(new ImageIcon("icon//DeuxTasses.png"));
         vue.btnDeuxtasses.setForeground(new Color(204, 255, 255));
         vue.btnDeuxtasses.setBackground(new Color(51, 51, 51));
 
         vue.btnDeuxtasses.addActionListener(e -> {
             if (!vue.selected) {
-                vue.selected = true;
-                vue.btnDeuxtasses.setSelected(true);
-                vue.btnDeuxtasses.setFocusable(true);
-                vue.btnDeuxtasses.setBackground(new Color(100, 51, 51));
-
-                // ici il faut introduire une image qui montre que la deux tasse est choisi
-                System.out.println(vue.btnDeuxtasses.isSelected());
-            } else {
-                vue.selected = false;
-                vue.btnDeuxtasses.setSelected(false);
-                vue.btnDeuxtasses.setFocusable(false);
-                vue.btnDeuxtasses.setBackground(new Color(51, 51, 51));
-                System.out.println(vue.btnDeuxtasses.isSelected());
+                setFocusDeuxTasses(vue, true);
+            }
+            else if (vue.selected){
+                setFocusDeuxTasses(vue, false);
             }
 
         });
 
-        vue.btnDeuxtasses.setBounds(12, 432, 107, 98);
+        vue.btnDeuxtasses.setBounds(12, 420, 110, 110);
         vue.frame.getContentPane().add(vue.btnDeuxtasses);
+    }
+
+    public void setFocusDeuxTasses(Vue vue, boolean b) {
+        vue.selected = b;
+        vue.btnDeuxtasses.setSelected(b);
+        vue.btnDeuxtasses.setFocusable(b);
+        if (b){
+            vue.btnDeuxtasses.setBackground(new Color(100, 51, 51));
+        }
+        else
+        {
+            vue.btnDeuxtasses.setBackground(new Color(51, 51, 51));
+        }
+
+
     }
 
 

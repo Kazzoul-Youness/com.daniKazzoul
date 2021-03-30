@@ -1,67 +1,75 @@
 package daniKazzoul.controller;
 
-import daniKazzoul.view.UtilisateurVue;
+import daniKazzoul.model.SimulateurModel;
+import daniKazzoul.view.SimulateurView;
+
+import static daniKazzoul.view.Vue.*;
 
 public class MaintenanceEntretientControlleur {
 
-    // - Singleton Pattern
+    // - Singleton Pattern  ---------------------------------------------
     private static final MaintenanceEntretientControlleur instance = new MaintenanceEntretientControlleur();
 
     //constructeur privé pour éviter que les applications clientes utilisent le constructeur
-    private MaintenanceEntretientControlleur(){  }
+    private MaintenanceEntretientControlleur() {
+    }
 
-    public static MaintenanceEntretientControlleur getInstance(){
+    public static MaintenanceEntretientControlleur getInstance() {
         return instance;
     }
 
 
 
-    /************** Les operations d'affichage d'entretient et maintenance ****************************/
 
-    public static void checkActionReturnReservoirEau(UtilisateurVue utilisateurVue, int action) {
-        if (action == 1) {
-            OperationControlleur.disableOtherFunction(utilisateurVue.btnAmericano, utilisateurVue.btnBas, utilisateurVue.btnCafe, utilisateurVue.btnCafeLait, utilisateurVue.btnCappuccino, utilisateurVue.btnDeuxtasses, utilisateurVue.btnEauChaude, utilisateurVue.btnExpresso, utilisateurVue.btnFavorisSecurite, utilisateurVue.btnIntensit, utilisateurVue.btnMenu, utilisateurVue.btnOk, utilisateurVue.btnQuantit, utilisateurVue.btnRetour);
-            utilisateurVue.btnStartStop.setEnabled(false);
-            if (utilisateurVue.textArea_MessageEcran.getText().equals("Appuyer sur stop pour annuler!\n"))
-                utilisateurVue.textArea_MessageEcran.setText(null);
-            utilisateurVue.textArea_MessageEcran.append(" Remplir le reservoir d'eau \n\n");
+    public static void remplireReservoirEauAction(SimulateurView simulateurView, int actionEau) {
+        if (actionEau == 1) {
+            SimulateurModel.remplireEau();
+            resetApresMaintenanceEtretient(simulateurView);
         }
     }
 
-    public static void checkActionReturnReservoirGraine(UtilisateurVue utilisateurVue, int action) {
-        if (action == 3) {
-            OperationControlleur.disableOtherFunction(utilisateurVue.btnAmericano, utilisateurVue.btnBas, utilisateurVue.btnCafe, utilisateurVue.btnCafeLait, utilisateurVue.btnCappuccino, utilisateurVue.btnDeuxtasses, utilisateurVue.btnEauChaude, utilisateurVue.btnExpresso, utilisateurVue.btnFavorisSecurite, utilisateurVue.btnIntensit, utilisateurVue.btnMenu, utilisateurVue.btnOk, utilisateurVue.btnQuantit, utilisateurVue.btnRetour);
-            utilisateurVue.btnStartStop.setEnabled(false);
-            if (utilisateurVue.textArea_MessageEcran.getText().equals("Appuyer sur stop pour annuler!\n"))
-                utilisateurVue.textArea_MessageEcran.setText(null);
-            utilisateurVue.textArea_MessageEcran.append(" Remplir graine café \n\n");
+    public static void viderBacCollecteurAction(SimulateurView simulateurView, int actionBac) {
+        if (actionBac == 1) {
+            SimulateurModel.viderBac();
+            resetApresMaintenanceEtretient(simulateurView);
         }
     }
 
-    public static void checkActionReturnBacColecteur(UtilisateurVue utilisateurVue, int action) {
-        if (action == 2) {
-            OperationControlleur.disableOtherFunction(utilisateurVue.btnAmericano, utilisateurVue.btnBas, utilisateurVue.btnCafe, utilisateurVue.btnCafeLait, utilisateurVue.btnCappuccino, utilisateurVue.btnDeuxtasses, utilisateurVue.btnEauChaude, utilisateurVue.btnExpresso, utilisateurVue.btnFavorisSecurite, utilisateurVue.btnIntensit, utilisateurVue.btnMenu, utilisateurVue.btnOk, utilisateurVue.btnQuantit, utilisateurVue.btnRetour);
-            utilisateurVue.btnStartStop.setEnabled(false);
-            if (utilisateurVue.textArea_MessageEcran.getText().equals("Appuyer sur stop pour annuler!\n"))
-                utilisateurVue.textArea_MessageEcran.setText(null);
-            utilisateurVue.textArea_MessageEcran.append(" Vider bac collecteur \n\n");
+    public static void remplireGrainCafeAction(SimulateurView simulateurView, int actionGraine) {
+        if (actionGraine == 1) {
+            SimulateurModel.remplireGraine();
+            resetApresMaintenanceEtretient(simulateurView);
         }
     }
 
-    public static void checkActionReturnNettoyage(UtilisateurVue utilisateurVue, int action) {
-        if (action == 4) {
-            utilisateurVue.nettoyageAccompli = false;
-            OperationControlleur.disableOtherFunction(utilisateurVue.btnAmericano, utilisateurVue.btnBas, utilisateurVue.btnCafe, utilisateurVue.btnCafeLait, utilisateurVue.btnCappuccino, utilisateurVue.btnDeuxtasses, utilisateurVue.btnEauChaude, utilisateurVue.btnExpresso, utilisateurVue.btnFavorisSecurite, utilisateurVue.btnIntensit, utilisateurVue.btnMenu, utilisateurVue.btnOk, utilisateurVue.btnQuantit, utilisateurVue.btnRetour);
-            utilisateurVue.btnOk.setEnabled(true);
-            utilisateurVue.btnMenu.setEnabled(false);
-            if (utilisateurVue.textArea_MessageEcran.getText().equals("Appuyer sur stop pour annuler!\n"))
-                utilisateurVue.textArea_MessageEcran.setText(null);
-            utilisateurVue.textArea_MessageEcran.append(" Nettoyage necessaire \n\n Appuyer sur (OK) pour commencer");
-
-            utilisateurVue.textField_Quantite.setText(null);
-            utilisateurVue.textField_Intensite.setText(null);
-            utilisateurVue.textField_Choice.setText(null);
+    public static void nettoyerMachineAction(SimulateurView simulateurView, int actionNettoyage) {
+        if (actionNettoyage == 1) {
+            SimulateurModel.nettoyer();
+            resetApresMaintenanceEtretient(simulateurView);
         }
     }
+
+    public static void detartrerMachineAction(SimulateurView simulateurView, int actionDetartrage) {
+        if (actionDetartrage == 1) {
+            SimulateurModel.detartrer();
+            resetApresMaintenanceEtretient(simulateurView);
+        }
+    }
+
+    public static void calcNCleanMachineAction(SimulateurView simulateurView, int actionCalc) {
+        if (actionCalc == 1) {
+            SimulateurModel.calcNClean();
+            resetApresMaintenanceEtretient(simulateurView);
+        }
+    }
+
+    private static void resetApresMaintenanceEtretient(SimulateurView simulateurView) {
+        OperationControlleur.enableAllFunctions(btnAmericano, btnBas, btnCafe, btnCafeLait, btnCappuccino, btnDeuxtasses, btnEauChaude, btnExpresso, btnFavorisSecurite, btnIntensit, btnMenu, btnQuantit, btnRetour, btnStartStop);
+        simulateurView.textArea_MessageEcran.setText(null);
+        simulateurView.btnStartStop.setText("Start/Stop");
+    }
+
+
+
 
 }

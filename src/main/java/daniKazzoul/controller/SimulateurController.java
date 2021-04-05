@@ -1,31 +1,29 @@
 package daniKazzoul.controller;
 
+import daniKazzoul.model.SingletoneBoissonNomEnum;
+import daniKazzoul.model.EntretientReservoirModel;
+import daniKazzoul.model.MaintenanceProgrammeModel;
 import daniKazzoul.model.SimulateurModel;
+import daniKazzoul.view.AbstractView;
 import daniKazzoul.view.SimulateurView;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-
-import static daniKazzoul.model.SimulateurModel.*;
 
 
 public class SimulateurController implements ActionListener {
 
-    // - Singleton Pattern ---------------------------------------------
-    private static final SimulateurController instance = new SimulateurController();
     public static int cpteurBoissonTotal;
 
-    //constructeur privé pour éviter que les applications clientes utilisent le constructeur
-    private SimulateurController(){
-    }
-
+    /** - Singleton Pattern ************************************************************/
+    private static SimulateurController instance = new SimulateurController();
+    private SimulateurController(){}
     public static SimulateurController getInstance(){
-        cpteurBoissonTotal = 1;
+        cpteurBoissonTotal = 0;
         return instance;
     }
 
-    /** MVC
+    /** MVC *****************************************************************
+     *
      * Le model de l'implementation MVC du simulateur.
      */
     private SimulateurModel model;
@@ -52,20 +50,20 @@ public class SimulateurController implements ActionListener {
             System.exit(0);
         }
         else {
-            model.checkMaintenanceNettoyage();
-            model.checkMaintenanceDetartrage();
-            model.checkMaintenanceCalcNClean();
-            model.checkNiveauEau();
-            model.checkNiveauCollecteur();
-            model.checkNiveauReservoirGraine();
+            MaintenanceProgrammeModel.getInstance().checkMaintenanceNettoyage();
+            MaintenanceProgrammeModel.getInstance().checkMaintenanceDetartrage();
+            MaintenanceProgrammeModel.getInstance().checkMaintenanceCalcNClean();
 
-            try {
-                new SimulateurView();
-            } catch (FileNotFoundException fileNotFoundException) {
-                fileNotFoundException.printStackTrace();
-            }
+            EntretientReservoirModel.getInstance().checkNiveauEau();
+            EntretientReservoirModel.getInstance().checkNiveauCollecteur();
+            EntretientReservoirModel.getInstance().checkNiveauReservoirGraine();
+
+            view.initialize();
         }
     }
+
+    
+
 
     /************************************************************************
     * Ravitaillement et Maintenance de la machine qui declenche l'entretient
@@ -85,7 +83,7 @@ public class SimulateurController implements ActionListener {
     * */
 
     public static int passerActionReservoirEau() {
-        if (SimulateurModel.checkNiveauEau() == 1) {
+        if (EntretientReservoirModel.getInstance().checkNiveauEau() == 1) {
            return 1;
         }
         return 0;
@@ -96,7 +94,7 @@ public class SimulateurController implements ActionListener {
      * sinon code 0 */
 
     public static int passerActionBacColecteur() {
-        if (SimulateurModel.checkNiveauCollecteur() == 1) {
+        if (EntretientReservoirModel.getInstance().checkNiveauCollecteur() == 1) {
             return 1;
         }
         return 0;
@@ -107,72 +105,78 @@ public class SimulateurController implements ActionListener {
     *  sinon code 0 */
 
     public static int passerActionReservoirGraine() {
-        if (SimulateurModel.checkNiveauReservoirGraine() == 1 ) {
+        if (EntretientReservoirModel.getInstance().checkNiveauReservoirGraine() == 1 ) {
             return 1;
         }
         return 0;
     }
 
     /** action qui declench la maintenance nettoyage automatique
-     * basé sur le comptage des boissons avec le cpteurBoissonTotal */
+     * basé sur le comptage des boissons avec le setCpteurBoissonTotal */
 
     public static int passerActionComptageBoissonNettoyage() {
-        if (SimulateurModel.checkMaintenanceNettoyage() == 1){
+        if (MaintenanceProgrammeModel.getInstance().checkMaintenanceNettoyage() == 1){
             return 1;
         }
         return 0;
     }
 
     /** actions qui declenchent la maintenance detartrage automatique
-     * basé sur le comptage des boissons avec le cpteurBoissonTotal */
+     * basé sur le comptage des boissons avec le setCpteurBoissonTotal */
 
     public static int passerActionComptageBoissonDetartrage() {
-        if (SimulateurModel.checkMaintenanceDetartrage() == 1){
+        if (MaintenanceProgrammeModel.getInstance().checkMaintenanceDetartrage() == 1){
             return 1;
         }
         return 0;
     }
 
     /** actions qui declenchent la maintenance calc'nClean automatique
-     * basé sur le comptage des boissons avec le cpteurBoissonTotal */
+     * basé sur le comptage des boissons avec le setCpteurBoissonTotal */
     public static int passerActionComptageBoissonCalcNClean() {
-        if (SimulateurModel.checkMaintenanceCalcNClean() == 1){
+        if (MaintenanceProgrammeModel.getInstance().checkMaintenanceCalcNClean() == 1){
             return 1;
         }
         return 0;
     }
 
-    /********************************************************/
-    /**  Verification au demarrage, et a chaque selection d'une boisson!
-    /*** Pour: soit remplir l'eau, remplir les graine, viderBac le bac,
-    **** et les programmes de maintenance : nettoyage, détartrage, calc'nClean
-    ***/
 
-    public void miseAJourTotal(String BoissonNom) {
-        System.out.println( "*** miseAJourTotal : "+BoissonNom );
+    public static int setCpteurBoissonTotal(){
 
-        if (BoissonNom.equals("EauChaude")){     // les boissons Eau chaude ne consomme pas de graines de café !
-            consommerBoissonParReservoir();
-            consomerBoissonCollecteur();
-//            consommerBoissonParGraine();
-        }
-        else /* if ( BoissonNom.equals(BoissonNomEnum.Expresso) || BoissonNom.equals(BoissonNomEnum.Cafe)
-                || BoissonNom.equals(BoissonNomEnum.CafeLait) || BoissonNom.equals(BoissonNomEnum.Cappuccino)
-                || BoissonNom.equals(BoissonNomEnum.Americano)) */{
-            consommerBoissonParReservoir();
-            consomerBoissonCollecteur();
-            consommerBoissonParGraine();
-        }
-        consommerBoissonAvantMaintenance();
-    }
-
-    public static int getCpteurBoissonTotal(){
         return cpteurBoissonTotal++;
     }
 
-//    public static int actionReturnGlobal(int entretientAction){
-//        SimulateurModel.checkActionReturnGlobal(SimulateurController.passerActionReservoirEau(), SimulateurController.passerActionBacColecteur(), SimulateurController.passerActionReservoirGraine(), SimulateurController.passerActionComptageBoissonNettoyage(), SimulateurController.passerActionComptageBoissonDetartrage(), entretientAction);
-//    }
+    public static int getCpteurBoissonTotal(){
+
+        return cpteurBoissonTotal;
+    }
+
+
+    /** Register le controller comme un listener pour les bouttons
+     * le gestionnaire d'événements pour le simulateur
+     */
+    public void registerListener() {
+
+        AbstractView.btnExpresso.addActionListener(e -> AbstractView.textField_Choice.setText(String.valueOf(SingletoneBoissonNomEnum.SingleBoissonNomEnum.Expresso)));
+        AbstractView.btnCafe.addActionListener(e -> AbstractView.textField_Choice.setText(String.valueOf(SingletoneBoissonNomEnum.SingleBoissonNomEnum.Cafe)));
+        AbstractView.btnCafeLait.addActionListener(e -> AbstractView.textField_Choice.setText(String.valueOf(SingletoneBoissonNomEnum.SingleBoissonNomEnum.CafeLait)));
+        AbstractView.btnCappuccino.addActionListener(e -> AbstractView.textField_Choice.setText(String.valueOf(SingletoneBoissonNomEnum.SingleBoissonNomEnum.Cappuccino)));
+        AbstractView.btnEauChaude.addActionListener(e -> AbstractView.textField_Choice.setText(String.valueOf(SingletoneBoissonNomEnum.SingleBoissonNomEnum.EauChaude)));
+        AbstractView.btnAmericano.addActionListener(e -> AbstractView.textField_Choice.setText(String.valueOf(SingletoneBoissonNomEnum.SingleBoissonNomEnum.Americano)));
+
+        AbstractView.btnStartStop.addActionListener(e -> { });
+        AbstractView.btnMenu.addActionListener(e -> { });
+        AbstractView.btnOk.addActionListener(e -> { });
+        AbstractView.btnBas.addActionListener(e -> { });
+        AbstractView.btnRetour.addActionListener(e -> { });
+
+        AbstractView.btnQuantit.addActionListener(e -> { });
+        AbstractView.btnIntensit.addActionListener(e -> { });
+        AbstractView.btnDeuxtasses.addActionListener(e -> { });
+        AbstractView.btnFavorisSecurite.addActionListener(e -> { });
+
+    }
+
 
 
 }

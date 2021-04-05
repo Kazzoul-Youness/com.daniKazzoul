@@ -27,17 +27,18 @@ dependencies {
 jar {
     // Add a manifest in the jar with main class to make it executable
     manifest {
-        attributes "Main-Class": 'daniKazzoul.Gui'
+         attributes "Main-Class": 'daniKazzoul.Gui'
     }
     // Add all the dependencies to the archive
     from {
         configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+   //     configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
     application {
         // Define the main class for the application.
-        mainClassName = 'daniKazzoul.Gui'
+         mainClassName = 'daniKazzoul.Gui'
     }
 
 /* to run the application you can use the command line "gradle clean build run" */

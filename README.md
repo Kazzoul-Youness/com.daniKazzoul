@@ -18,7 +18,8 @@ Cours Modélisation Logicielle
 
 Master en sciences informatique
 
-
+Lien vidéo mode d’emploi, démontrant les fonctionnalités de l’application. Présentation du projet simulateur d'une Machine à Café :
+https://www.youtube.com/watch?v=_PW220TLZ8w
 
 
 

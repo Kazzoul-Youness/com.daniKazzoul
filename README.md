@@ -1,28 +1,23 @@
+# Simulateur d'une Machine à café en Java
 
-Projet simulateur d'une Machine à café phase implementation à l'UMONS
+Projet réalisé à l'UMONS, année académique 2020-2021
+dans le cadre du cours de Modélisation Logicielle
+Master en Sciences Informatiques
+à horaire décalé à Charleroi
 
+## Contributeurs
 
-Titulaire: Tom MENS
+Auteurs: Mohsine DANI, Youness KAZZOUL
 
+Enseignants du cours: Tom MENS, Gauvain DEVILLEZ
 
-Enseignant: Gauvain DEVILLEZ
+## Documentation
 
-
-Autheurs    : Mohsine DANI & Kazzoul Youness
-
-
-
-Cours Modélisation Logicielle
-
-
-
-Master en sciences informatique
-
-Lien vidéo mode d’emploi, démontrant les fonctionnalités de l’application. Présentation du projet simulateur d'une Machine à Café :
+Lien vidéo contenant le mode d’emploi, démontrant les fonctionnalités de l’application :
 https://www.youtube.com/watch?v=_PW220TLZ8w
 
+## Instructions d'installation
 
-
-
-/* to run the application you can use the command line "gradle clean build run" */
+To run the application you can use the command line
+"gradle clean build run"
 

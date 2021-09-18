@@ -34,12 +34,12 @@ https://www.youtube.com/watch?v=_PW220TLZ8w
 
 ## Instructions d'installation
 
-**. Pour démarrer l'application:**
-1. Dans intelliji on utiliser la commande suivante :<br/>
+**. Pour tester l'application:**
+1. Dans intellij on utiliser la commande suivante en bas dans le terminal :<br/>
 gradle clean build run<br/>
 
-2. Pour une utilisation externe parexemlpe sur linux on utiliser la commande suivante :<br/>
-java -jar build/libs/com.daniKazzoul-1.0-SNAPSHOT.jar<br/><br/>
+2. Pour une utilisation externe par exemple sur linux, on se place dans le répertoire parent "com.danikazzoul" apres avoir décompressé le zip, et on utiliser la commande suivante :<br/>
+java -jar out/artifacts/MachineACafe_com_daniKazzoul_main_jar/MachineACafe.com.daniKazzoul.main.jar<br/><br/>
 
 
 **Ps**: Si un problème persiste, il faut installer **GCC**

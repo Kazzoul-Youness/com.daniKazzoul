@@ -1,6 +1,7 @@
 package daniKazzoul.components;
 
-import daniKazzoul.view.UtilisateurVue;
+import daniKazzoul.view.SimulateurView;
+import daniKazzoul.view.Vue;
 
 import javax.swing.*;
 
@@ -8,83 +9,66 @@ public class BandeauCommande {
 
     // - Affichage menu Principal /
 
-    public static void actionMenuPrincipal(UtilisateurVue utilisateurVue) {
+    public static void actionMenuPrincipal(SimulateurView simulateurView) {
 
-        if (utilisateurVue.selectionChoixMenu == 0) {
-            utilisateurVue.textField_Choice.setText("Maintenance");
-            utilisateurVue.textArea_MessageEcran.setText(" Appuyer sur (Ok), \n\n pour entrer dans le menu maintenance");
-            utilisateurVue.selectionChoixMenu++;
-        } else if (utilisateurVue.selectionChoixMenu == 1) {
-            utilisateurVue.textField_Choice.setText("Favori");
-            utilisateurVue.textArea_MessageEcran.setText(" Appuyer sur (Ok), \n\n pour entrer dans le menu Favori");
-            utilisateurVue.selectionChoixMenu++;
-        } else if (utilisateurVue.selectionChoixMenu == 2) {
-            utilisateurVue.textField_Choice.setText("Langue");
-            utilisateurVue.textArea_MessageEcran.setText(" Appuyer sur (Ok), \n\n pour entrer dans le menu Langue");
-            utilisateurVue.selectionChoixMenu = 0;
+        if (simulateurView.selectionChoixMenu == 0) {
+            Vue.textField_Choice.setText("Maintenance");
+            Vue.textArea_MessageEcran.setText(" Appuyer sur (Ok), \n\n pour entrer dans le menu maintenance");
+            simulateurView.selectionChoixMenu++;
+        } else if (simulateurView.selectionChoixMenu == 1) {
+            Vue.textField_Choice.setText("Favori");
+            Vue.textArea_MessageEcran.setText(" Appuyer sur (Ok), \n\n pour entrer dans le menu Favori");
+            simulateurView.selectionChoixMenu = 0;
         }
     }
 
     // - Affichage sous menu Maintenance
 
-    public static void sousMenuMaintenance(UtilisateurVue utilisateurVue) {
+    public static void sousMenuMaintenance(SimulateurView simulateurView) {
 
-        if (utilisateurVue.selectionChoixMaintenance == 0) {
-            utilisateurVue.textField_Choice.setText("Nettoyer le mousseur de lait");
-            utilisateurVue.selectionChoixMaintenance++;
-        } else if (utilisateurVue.selectionChoixMaintenance == 1) {
-            utilisateurVue.textField_Choice.setText("Détartrage");
-            utilisateurVue.selectionChoixMaintenance++;
-        } else if (utilisateurVue.selectionChoixMaintenance == 2) {
-            utilisateurVue.textField_Choice.setText("Nettoyage");
-            utilisateurVue.selectionChoixMaintenance++;
-        } else if (utilisateurVue.selectionChoixMaintenance == 3) {
-            utilisateurVue.textField_Choice.setText("calc'nClean");
-            utilisateurVue.selectionChoixMaintenance = 0;
+        if (simulateurView.selectionChoixMaintenance == 0) {
+            Vue.textField_Choice.setText("Nettoyer le mousseur de lait");
+            simulateurView.selectionChoixMaintenance++;
         }
-    }
-
-    // - Affichage sous menu Langue - reglage
-
-    public static void sousMenuLangue(UtilisateurVue utilisateurVue) {
-
-        if (utilisateurVue.selectionChoixLangue == 0) {
-            utilisateurVue.textField_Choice.setText("Allemand");
-            utilisateurVue.selectionChoixLangue++;
+        else if (simulateurView.selectionChoixMaintenance == 1) {
+            Vue.textField_Choice.setText("Détartrage");
+            simulateurView.selectionChoixMaintenance++;
         }
-        else if (utilisateurVue.selectionChoixLangue == 1) {
-            utilisateurVue.textField_Choice.setText("Français");
-            utilisateurVue.selectionChoixLangue++;
+        else if (simulateurView.selectionChoixMaintenance == 2) {
+            Vue.textField_Choice.setText("Nettoyage");
+            simulateurView.selectionChoixMaintenance++;
         }
-        else if (utilisateurVue.selectionChoixLangue == 2) {
-            utilisateurVue.textField_Choice.setText("Néerlandais");
-            utilisateurVue.selectionChoixLangue = 0;
+        else if (simulateurView.selectionChoixMaintenance == 3) {
+            Vue.textField_Choice.setText("calc'nClean");
+            simulateurView.selectionChoixMaintenance = 0;
         }
     }
 
 
     // - Affichage sous menu Favori - reglage
 
-    public static void sousMenuFavori(UtilisateurVue utilisateurVue) {
+    public static void sousMenuFavori(SimulateurView simulateurView) {
 
-        if (utilisateurVue.selectionChoixFavori == 0) {
-            utilisateurVue.textField_Choice.setText("Profile 1");
-            utilisateurVue.selectionChoixFavori++;
-        } else if (utilisateurVue.selectionChoixFavori == 1) {
-            utilisateurVue.textField_Choice.setText("Profile 2");
-            utilisateurVue.selectionChoixFavori =0;
+        if (SimulateurView.selectionChoixFavori == 0) {
+            Vue.textField_Choice.setText("Profile 1");
+            SimulateurView.selectionChoixFavori++;
+        }
+        else if (SimulateurView.selectionChoixFavori == 1) {
+            Vue.textField_Choice.setText("Profile 2");
+            SimulateurView.selectionChoixFavori = 0;
         }
     }
 
     // - ProgressBar
-    public static void createProgressBar(UtilisateurVue utilisateurVue) {
-        utilisateurVue.progressBar = new JProgressBar(0, 1000);
-        utilisateurVue.progressBar.setForeground(UIManager.getColor("Table.dropLineColor"));
-        utilisateurVue.progressBar.setBounds(282, 463, 400, 38);
-        utilisateurVue.progressBar.setVisible(true);
-        utilisateurVue.progressBar.setStringPainted(true);
-        utilisateurVue.frame.getContentPane().add(utilisateurVue.progressBar);
-        utilisateurVue.setSize(500, 500);
-
+    public static void createProgressBar(SimulateurView simulateurView) {
+        Vue.progressBar = new JProgressBar(0, 1000);
+        Vue.progressBar.setForeground(UIManager.getColor("Table.dropLineColor"));
+        Vue.progressBar.setBounds(282, 463, 400, 38);
+        Vue.progressBar.setVisible(true);
+        Vue.progressBar.setStringPainted(true);
+        simulateurView.frame.getContentPane().add(Vue.progressBar);
+        simulateurView.setSize(500, 500);
     }
+
+
 }

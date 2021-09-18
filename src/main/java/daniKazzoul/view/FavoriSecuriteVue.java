@@ -1,9 +1,10 @@
 package daniKazzoul.view;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.FileNotFoundException;
 
-public class FavoriSecuriteVue extends UtilisateurVue{
+public class FavoriSecuriteVue extends SimulateurView {
 
 
     public FavoriSecuriteVue() throws FileNotFoundException {
@@ -11,28 +12,22 @@ public class FavoriSecuriteVue extends UtilisateurVue{
 
 
     /**********************         Favoris Et/Ou sécurité Enfant   ********************************
-     * @param utilisateurVue*/
+     * @param simulateurView*/
 
-    static void createButtonFavoriSecurite(final UtilisateurVue utilisateurVue) {
-        utilisateurVue.btnFavorisSecurite = new JButton("FavoriSecurite");
-        utilisateurVue.btnFavorisSecurite.setIcon(new ImageIcon("icon//FavoriSecurite.png"));
-        utilisateurVue.btnFavorisSecurite.setToolTipText("");
-        utilisateurVue.btnFavorisSecurite.setBounds(867, 406, 121, 95);
-        utilisateurVue.frame.getContentPane().add(utilisateurVue.btnFavorisSecurite);
+    static void createButtonFavoriSecurite(final SimulateurView simulateurView) {
+        btnFavorisSecurite = new JButton("FavoriSecurite");
+        
+        btnFavorisSecurite.setBounds(822, 420, 170, 120);
+        btnFavorisSecurite.setFont(new Font("Dialog", Font.BOLD, 17));
+        simulateurView.frame.getContentPane().add(btnFavorisSecurite);
 
-        /* **************        Favori        ************************************************/
-
-        //  int profile = 1; // par defaut le profile d'utilisateur est à 1
-
-        utilisateurVue.btnFavorisSecurite.addActionListener(e -> {
-
-            Favori.favori(utilisateurVue);
-
+        // Favori
+        btnFavorisSecurite.addActionListener(e -> {
+            Favori.favori(simulateurView);
         });
 
-        /* **************       activer desactiver la Securite      **************************************/
-
-        Securite.Securite(utilisateurVue);
+        // activer desactiver la Securite
+        Securite.Securite(simulateurView);
 
     }
 

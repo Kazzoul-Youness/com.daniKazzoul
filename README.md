@@ -34,15 +34,15 @@ https://www.youtube.com/watch?v=_PW220TLZ8w
 
 ## Instructions d'installation
 
-**. Pour tester l'application:**
+**Pour exécuter l'application:**
 1. Dans intellij on utiliser la commande suivante dans le terminal :<br/>
 gradle clean build run<br/>
 
-2. Pour une utilisation externe sans rien installer, uniquement telecharger le zip, par exemple sur linux on se place dans le répertoire parent "com.danikazzoul", et on lance la commande suivante :<br/>
+2. Pour une utilisation externe sans rien installer, uniquement telecharger le zip, par exemple sur Linux on se place dans le répertoire parent "com.danikazzoul", et on lance la commande suivante :<br/>
 java -jar out/artifacts/MachineACafe_com_daniKazzoul_main_jar/MachineACafe.com.daniKazzoul.main.jar<br/><br/>
 
 
-**Ps**: Si un problème persiste, il faut installer **GCC**
+**P.S.** Si un problème persiste, il faut installer **GCC**
 
 
 

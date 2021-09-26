@@ -3,24 +3,23 @@ package daniKazzoul.components;
 import javax.swing.*;
 import java.util.List;
 
-public class ProgressWorker extends SwingWorker<Void, Integer> {
+public class ProgressFavoris extends SwingWorker<Void, Integer> {
     private static final long LOOP_LENGTH = 85000000;
 
-    private final JProgressBar progress;
+    public JProgressBar progress;
+
     private final JTextArea message;
     private final JButton favorisSecurite;
     private final JButton btnOk;
 
-
-    public ProgressWorker(JProgressBar progress, JTextArea message, JButton favorisSecurite, JButton btnOk) {
+    public ProgressFavoris(JProgressBar progress, JTextArea message, JButton favorisSecurite, JButton btnOk) {
         this.progress = progress;
         this.message = message;
         this.favorisSecurite = favorisSecurite;
         this.btnOk = btnOk;
     }
-
     @Override
-    public Void doInBackground() throws Exception {
+    public Void doInBackground() {
         for (long i = LOOP_LENGTH; i > 0; i--) {
             final int progr = (int) ((1000L * (LOOP_LENGTH - i)) / LOOP_LENGTH);
             publish(progr);
@@ -33,13 +32,12 @@ public class ProgressWorker extends SwingWorker<Void, Integer> {
         progress.setValue(chunks.get(chunks.size() - 1));
         super.process(chunks);
     }
-
     @Override
-    protected void done() {
+    public void done() {
         //progress.setValue(1000);
         progress.setValue(0);
-        System.out.println(" done ");
-        message.setText("");
+        System.out.println(" Favoris enregistré ");
+        message.setText("\n Appuyer sur (Ok), \n\n pour sortir vers le menu");
         favorisSecurite.setEnabled(true);
         btnOk.setEnabled(true);
     }

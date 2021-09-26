@@ -1,12 +1,12 @@
 package daniKazzoul;
 
-import daniKazzoul.components.BacCollecteur;
-import daniKazzoul.components.ReservoirEau;
-import daniKazzoul.components.ReservoirGraine;
-import daniKazzoul.view.UtilisateurVue;
+import daniKazzoul.controller.SimulateurController;
+import daniKazzoul.model.SimulateurModel;
+import daniKazzoul.view.SimulateurView;
 import daniKazzoul.view.Vue;
 
-import static java.awt.EventQueue.invokeLater;
+import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class Gui {
 
@@ -19,13 +19,13 @@ public class Gui {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+		}
+		catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
 			java.util.logging.Logger.getLogger(Vue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//Launching frames
 
-
-		invokeLater(() -> {
+		EventQueue.invokeLater(() -> {
 			try {
 				createAndShowGUI();
 			} catch (Exception e) {
@@ -34,20 +34,19 @@ public class Gui {
 		});
 	}
 
+	public static void createAndShowGUI() throws FileNotFoundException {
+		System.out.println("*********** Simulateur de machine à café *************");
 
+		/* Création un nouveau model, view et controller */
+		SimulateurModel model = new SimulateurModel();
+		SimulateurView view = new SimulateurView();
+		SimulateurController controller = new SimulateurController(model, view);
 
-	public static void createAndShowGUI() throws Exception {
+		/* Register le controller comme un listener */
+		view.registerListener(controller);
 
-		UtilisateurVue window = new UtilisateurVue();
-		window.frame.setVisible(true);
-
-		ReservoirEau.initializeReservoirEau();
-		BacCollecteur.initializeBacCollecteur();
-		ReservoirGraine.initializeReservoirGraine();
-		//ProgressBarComposant.ProgressBarComposant();
-
-
-
+//		UtilisateurVue window = new UtilisateurVue();
+		view.frame.setVisible(true);
 
 	}
 

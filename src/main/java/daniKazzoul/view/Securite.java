@@ -2,7 +2,6 @@ package daniKazzoul.view;
 
 import daniKazzoul.controller.OperationControlleur;
 
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileNotFoundException;
@@ -14,38 +13,42 @@ public class Securite extends FavoriSecuriteVue{
     }
 
 
-    static void Securite(UtilisateurVue utilisateurVue) {
+    static void Securite(SimulateurView simulateurView) {
 
-        utilisateurVue.btnFavorisSecurite.addMouseListener(new MouseAdapter() {
+
+
+        btnFavorisSecurite.addMouseListener(new MouseAdapter() {
             private java.util.Timer t1;
 
             public void mousePressed(MouseEvent e) {
                 if (t1 == null) {
                     t1 = new java.util.Timer();
                 }
-                if (utilisateurVue.btnFavorisSecurite.getText().equals("FavoriSecurite")) {
+                if (btnFavorisSecurite.getText().equals("FavoriSecurite")) {
                     t1.schedule(new TimerTask() {
 
                         public void run() {
                             System.out.println("Machine est bloquée");
-                            OperationControlleur.desableBoisson(utilisateurVue.btnAmericano, utilisateurVue.btnCafe, utilisateurVue.btnCafeLait, utilisateurVue.btnCappuccino, utilisateurVue.btnEauChaude, utilisateurVue.btnExpresso);
-                            OperationControlleur.desableParametre(utilisateurVue.btnDeuxtasses, utilisateurVue.btnIntensit, utilisateurVue.btnQuantit);
-                            OperationControlleur.desableComposante(utilisateurVue.btnFavorisSecurite, utilisateurVue.progressBar, utilisateurVue.textArea_MessageEcran, utilisateurVue.textField_Choice, utilisateurVue.textField_Intensite, utilisateurVue.textField_Quantite);
-                            utilisateurVue.btnStartStop.setEnabled(false);
-                            utilisateurVue.btnMenu.setEnabled(false);
-                            utilisateurVue.btnBas.setEnabled(false);
-                            utilisateurVue.btnOk.setEnabled(false);
-                            utilisateurVue.btnRetour.setEnabled(false);
-                            utilisateurVue.btnFavorisSecurite.setEnabled(true);
+                            securiteActive = true;
+                            OperationControlleur.desableBoisson(btnAmericano, btnCafe, btnCafeLait, btnCappuccino, btnEauChaude, btnExpresso);
+                            OperationControlleur.desableParametre(btnDeuxtasses, btnIntensit, btnQuantit);
+                            OperationControlleur.desableComposante(btnFavorisSecurite, progressBar, textArea_MessageEcran, textField_Choice, textField_Intensite, textField_Quantite);
+                            btnStartStop.setEnabled(false);
+                            btnMenu.setEnabled(false);
+                            btnBas.setEnabled(false);
+                            btnOk.setEnabled(false);
+                            btnRetour.setEnabled(false);
+                            btnFavorisSecurite.setEnabled(true);
 
-                            utilisateurVue.textField_Choice.setText(null);
-                            utilisateurVue.textArea_MessageEcran.setEnabled(true);
-                            utilisateurVue.textArea_MessageEcran.setText("\n Sécurité enfant activé, " +
+                            textField_Choice.setText(null);
+                            textArea_MessageEcran.setEnabled(true);
+                            textArea_MessageEcran.setText("\n Sécurité enfant activé, " +
                                     "\n\n Appuyer plus de 3s \n\n pour la désactiver ");
 
-                            utilisateurVue.btnFavorisSecurite.setIcon(new ImageIcon("icon//cle.png"));
 
-                            utilisateurVue.btnFavorisSecurite.setText("Securite");
+                        //    utilisateurVue.btnFavorisSecurite.setIcon(new ImageIcon("icon//cle.png"));
+
+                            btnFavorisSecurite.setText("Securite");
                         }
                     }, 3000);
                 }
@@ -58,7 +61,7 @@ public class Securite extends FavoriSecuriteVue{
                 }
             }
         });
-        utilisateurVue.btnFavorisSecurite.addMouseListener(new MouseAdapter() {
+        btnFavorisSecurite.addMouseListener(new MouseAdapter() {
             private java.util.Timer t2;
 
             //Timer t1;
@@ -66,13 +69,20 @@ public class Securite extends FavoriSecuriteVue{
                 if (t2 == null) {
                     t2 = new java.util.Timer();
                 }
-                if (utilisateurVue.btnFavorisSecurite.getText().equals("Securite")) {
+                if (btnFavorisSecurite.getText().equals("Securite")) {
                     t2.schedule(new TimerTask() {
                         public void run() {
                             System.out.println("Machine est débloquée");
-                            OperationControlleur.resetMachine(utilisateurVue.btnAmericano, utilisateurVue.btnBas, utilisateurVue.btnCafe, utilisateurVue.btnCafeLait, utilisateurVue.btnCappuccino, utilisateurVue.btnDeuxtasses, utilisateurVue.btnEauChaude, utilisateurVue.btnExpresso, utilisateurVue.btnFavorisSecurite, utilisateurVue.btnIntensit, utilisateurVue.btnMenu, utilisateurVue.btnOk, utilisateurVue.btnQuantit, utilisateurVue.btnRetour, utilisateurVue.btnStartStop, utilisateurVue.progressBar, utilisateurVue.textArea_MessageEcran, utilisateurVue.textField_Choice, utilisateurVue.textField_Intensite, utilisateurVue.textField_Quantite, utilisateurVue.timer, utilisateurVue.timer1, utilisateurVue.timer2, utilisateurVue.timer3, utilisateurVue.timer4, utilisateurVue.timer5, utilisateurVue.timer6);
-                            utilisateurVue.btnFavorisSecurite.setText("FavoriSecurite");
-                            utilisateurVue.btnFavorisSecurite.setIcon(new ImageIcon("icon//FavoriSecurite.png"));
+                            securiteActive = false;
+                            OperationControlleur.resetMachine(btnAmericano, btnBas, btnCafe,
+                                    btnCafeLait, btnCappuccino, btnDeuxtasses,
+                                    btnEauChaude, btnExpresso, btnFavorisSecurite,
+                                    btnIntensit, btnMenu, btnOk, btnQuantit,
+                                    btnRetour, btnStartStop, progressBar, textArea_MessageEcran,
+                                    textField_Choice, textField_Intensite, textField_Quantite, timer);
+
+                            btnFavorisSecurite.setText("FavoriSecurite");
+                          //  utilisateurVue.btnFavorisSecurite.setIcon(new ImageIcon("icon//FavoriSecurite.png"));
 
                         }
                     }, 3000);

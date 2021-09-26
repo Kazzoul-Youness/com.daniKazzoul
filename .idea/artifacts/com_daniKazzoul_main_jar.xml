@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="com.daniKazzoul.main:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/com_daniKazzoul_main_jar</output-path>
+    <root id="archive" name="com.daniKazzoul.main.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

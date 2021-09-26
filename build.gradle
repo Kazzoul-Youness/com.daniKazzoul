@@ -19,9 +19,9 @@ repositories {
 
 dependencies {
     // Add jupiter-api to build the tests
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
+    testImplementation('org.junit.jupiter:junit-jupiter-api:5.8.0')
     // Add jupiter-engine to run the tests
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+    testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.8.0')
     }
 
 jar {

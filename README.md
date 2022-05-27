@@ -58,7 +58,7 @@ gradle clean build run<br/>
 java -jar build/libs/com.daniKazzoul-1.0-SNAPSHOT.jar<br/><br/>
 
 
-**P.S.1** Si un problème persiste, il faut installer **GCC**
+**P.S.1** : Si un problème persiste, il faut installer **GCC**
 
 
 
